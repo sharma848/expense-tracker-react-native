@@ -156,29 +156,31 @@ const AddExpenseScreen: React.FC = () => {
                             Amount
                         </Text>
                         <View style={styles.amountInputContainer}>
-                            <View style={styles.currencyWrapper}>
-                                <Text
-                                    style={[
-                                        styles.currencySymbol,
-                                        { color: colors.text },
-                                    ]}
-                                >
-                                    {currency.symbol}
-                                </Text>
-                            </View>
-                            <View style={styles.inputWrapper}>
-                                <TextInput
-                                    style={[
-                                        styles.amountInput,
-                                        { color: colors.text },
-                                    ]}
-                                    placeholder="0.00"
-                                    placeholderTextColor={colors.textSecondary}
-                                    value={amount}
-                                    onChangeText={setAmount}
-                                    keyboardType="decimal-pad"
-                                    autoFocus
-                                />
+                            <View style={styles.amountInputGroup}>
+                                <View style={styles.currencyWrapper}>
+                                    <Text
+                                        style={[
+                                            styles.currencySymbol,
+                                            { color: colors.text },
+                                        ]}
+                                    >
+                                        {currency.symbol}
+                                    </Text>
+                                </View>
+                                <View style={styles.inputWrapper}>
+                                    <TextInput
+                                        style={[
+                                            styles.amountInput,
+                                            { color: colors.text },
+                                        ]}
+                                        placeholder="0.00"
+                                        placeholderTextColor={colors.textSecondary}
+                                        value={amount}
+                                        onChangeText={setAmount}
+                                        keyboardType="decimal-pad"
+                                        autoFocus
+                                    />
+                                </View>
                             </View>
                         </View>
                     </View>
@@ -282,11 +284,16 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     amountInputContainer: {
+        width: "100%",
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    amountInputGroup: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        width: "100%",
-        height: 50, // Fixed height for consistent alignment
+        height: 50,
     },
     currencyWrapper: {
         height: 50,
@@ -305,13 +312,14 @@ const styles = StyleSheet.create({
     inputWrapper: {
         height: 50,
         justifyContent: "center",
-        minWidth: 150,
+        alignItems: "center",
+        flex: 0,
     },
     amountInput: {
         ...typography.display,
         fontSize: 44,
         fontWeight: "700",
-        textAlign: "left",
+        textAlign: "center",
         padding: 0,
         margin: 0,
         letterSpacing: -0.5,

@@ -156,33 +156,29 @@ const LoginScreen: React.FC = () => {
 
           {/* Filled Inputs */}
           <View style={styles.form}>
-            <View style={[styles.inputWrapper, { backgroundColor: colors.surface }, shadows.md]}>
-              <Input
-                label="Username"
-                value={username}
-                onChangeText={setUsername}
-                placeholder="Enter username"
-                autoCapitalize="none"
-                error={error && !password.trim() ? error : undefined}
-                editable={!isLoading}
-                style={styles.filledInput}
-              />
-            </View>
+            <Input
+              value={username}
+              onChangeText={setUsername}
+              placeholder="Enter username"
+              autoCapitalize="none"
+              error={error && !password.trim() ? error : undefined}
+              editable={!isLoading}
+              containerStyle={styles.inputContainer}
+              inputStyle={styles.inputField}
+            />
 
-            <View style={[styles.inputWrapper, { backgroundColor: colors.surface }, shadows.md]}>
-              <Input
-                label="Password"
-                value={password}
-                onChangeText={setPassword}
-                placeholder="Enter password"
-                secureTextEntry
-                autoCapitalize="none"
-                error={error && password.trim() ? error : undefined}
-                editable={!isLoading}
-                onSubmitEditing={handleLogin}
-                style={styles.filledInput}
-              />
-            </View>
+            <Input
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Enter password"
+              secureTextEntry
+              autoCapitalize="none"
+              error={error && password.trim() ? error : undefined}
+              editable={!isLoading}
+              onSubmitEditing={handleLogin}
+              containerStyle={styles.inputContainer}
+              inputStyle={styles.inputField}
+            />
 
             {/* Gradient Button */}
             <TouchableOpacity
@@ -282,13 +278,13 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 400,
   },
-  inputWrapper: {
-    borderRadius: borderRadius.md,
-    marginBottom: spacing.lg,
-    padding: spacing.sm,
+  inputContainer: {
+    marginBottom: spacing.xl,
   },
-  filledInput: {
-    backgroundColor: 'transparent',
+  inputField: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 0,
+    ...shadows.sm,
   },
   // Gradient Button
   gradientButtonContainer: {

@@ -20,6 +20,10 @@ interface InputProps {
     multiline?: boolean;
     error?: string;
     autoCapitalize?: "none" | "sentences" | "words" | "characters";
+    containerStyle?: object;
+    inputStyle?: object;
+    editable?: boolean;
+    onSubmitEditing?: () => void;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -32,11 +36,15 @@ export const Input: React.FC<InputProps> = ({
     multiline = false,
     error,
     autoCapitalize = "none",
+    containerStyle,
+    inputStyle,
+    editable = true,
+    onSubmitEditing,
 }) => {
     const { colors } = useTheme();
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, containerStyle]}>
             {label && (
                 <Text style={[styles.label, { color: colors.text }]}>
                     {label}
@@ -51,6 +59,7 @@ export const Input: React.FC<InputProps> = ({
                         color: colors.text,
                         borderColor: error ? colors.error : "transparent",
                     },
+                    inputStyle,
                 ]}
                 value={value}
                 onChangeText={onChangeText}
@@ -60,6 +69,8 @@ export const Input: React.FC<InputProps> = ({
                 secureTextEntry={secureTextEntry}
                 multiline={multiline}
                 autoCapitalize={autoCapitalize}
+                editable={editable}
+                onSubmitEditing={onSubmitEditing}
             />
             {error && (
                 <Text style={[styles.errorText, { color: colors.error }]}>

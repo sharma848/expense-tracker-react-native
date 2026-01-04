@@ -142,11 +142,16 @@ const TabIcon: React.FC<{ name: string; color: string; focused: boolean }> = ({
  * Main App Navigator
  */
 export const AppNavigator: React.FC = () => {
-    const { isAuthenticated, checkAuthState } = useAuthStore();
+    const { isAuthenticated, isLoading, checkAuthState } = useAuthStore();
 
     useEffect(() => {
         checkAuthState();
     }, [checkAuthState]);
+
+    // Show nothing while checking auth state to prevent flash of login screen
+    if (isLoading) {
+        return null;
+    }
 
     return (
         <NavigationContainer>

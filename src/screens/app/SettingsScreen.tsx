@@ -32,7 +32,6 @@ import { useTheme } from '../../hooks/useTheme';
 import { typography } from '../../theme/typography';
 import { spacing, borderRadius, shadows } from '../../theme/spacing';
 import { Card } from '../../components/ui/Card';
-import { Button } from '../../components/ui/Button';
 
 const SettingsScreen: React.FC = () => {
   const { colors, themePreference } = useTheme();
@@ -129,17 +128,22 @@ const SettingsScreen: React.FC = () => {
     >
       {/* Account section */}
       <Card style={styles.sectionCard}>
-        <View style={styles.sectionHeaderRow}>
-          <MaterialCommunityIcons name="account" size={20} color={colors.primary} />
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>Account</Text>
-        </View>
         <View style={styles.accountRow}>
           <View style={styles.accountLeft}>
-            <MaterialCommunityIcons name="account-circle" size={18} color={colors.textSecondary} />
-            <Text style={[styles.accountLabel, { color: colors.textSecondary }]}>Username</Text>
+            <View style={[styles.profileIconContainer, { backgroundColor: colors.primary + '20' }]}>
+              <MaterialCommunityIcons name="account" size={24} color={colors.primary} />
+            </View>
+            <Text style={[styles.accountValue, { color: colors.text }]}>{username || 'user'}</Text>
           </View>
-          <Text style={[styles.accountValue, { color: colors.text }]}>{username || 'user'}</Text>
         </View>
+        <TouchableOpacity
+          style={[styles.logoutButton, { backgroundColor: colors.error + '15' }]}
+          onPress={handleLogout}
+          activeOpacity={0.7}
+        >
+          <MaterialCommunityIcons name="logout" size={18} color={colors.error} />
+          <Text style={[styles.logoutButtonText, { color: colors.error }]}>Logout</Text>
+        </TouchableOpacity>
       </Card>
 
       {/* Appearance/Theme section */}
@@ -283,15 +287,6 @@ const SettingsScreen: React.FC = () => {
         })}
       </Card>
 
-      {/* Logout button at bottom (danger color) */}
-      <View style={styles.logoutSection}>
-        <Button
-          title="Logout"
-          onPress={handleLogout}
-          variant="danger"
-          fullWidth
-        />
-      </View>
 
       <AddPaymentMethodModal
         visible={showAddModal}
@@ -516,21 +511,37 @@ const styles = StyleSheet.create({
   },
   // Account row
   accountRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: spacing.sm,
+    marginTop: spacing.sm,
+    marginBottom: spacing.lg,
   },
   accountLeft: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.sm,
+    gap: spacing.md,
   },
-  accountLabel: {
-    ...typography.subhead,
-    fontSize: 13,
+  profileIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   accountValue: {
+    ...typography.bodyBold,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  logoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    borderRadius: borderRadius.md,
+    gap: spacing.sm,
+    marginTop: spacing.sm,
+  },
+  logoutButtonText: {
     ...typography.bodyBold,
     fontSize: 15,
     fontWeight: '600',
@@ -639,11 +650,6 @@ const styles = StyleSheet.create({
     ...typography.caption,
     fontWeight: '600',
     fontSize: 12,
-  },
-  // Logout section at bottom
-  logoutSection: {
-    marginTop: spacing.xl,
-    paddingHorizontal: spacing.screenPadding,
   },
   modalOverlay: {
     flex: 1,
