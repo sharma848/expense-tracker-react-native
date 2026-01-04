@@ -12,6 +12,7 @@
             "backgroundColor": "#ffffff"
         },
         "assetBundlePatterns": ["**/*"],
+        "platforms": ["ios", "android", "web"],
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.expensetracker.app",
@@ -27,7 +28,8 @@
             "package": "com.expensetracker.app"
         },
         "web": {
-            "favicon": "./assets/favicon.png"
+            "favicon": "./assets/favicon.png",
+            "bundler": "metro"
         }
     }
 }
